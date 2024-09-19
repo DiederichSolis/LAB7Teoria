@@ -86,3 +86,17 @@ def mostrar_gramatica(grammar, title):
         productions = ' | '.join(sorted(prods, key=lambda x: (x != 'ε', x)))
         print(f"{lhs} → {productions}")
 
+def main():
+    filename = input("Ingrese el nombre del archivo de gramática (e.g., 'gramatica1.txt'): ")
+    grammar, non_terminals, terminals = lectura_gramatica(filename)
+
+    mostrar_gramatica(grammar, "Gramática original:")
+
+    nullable = find_nullable_non_terminals(grammar)
+
+    new_grammar = remove_epsilon_productions(grammar, nullable)
+
+    mostrar_gramatica(new_grammar, "Gramática sin producciones-ε:")
+
+if __name__ == "__main__":
+    main()
